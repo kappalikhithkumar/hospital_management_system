@@ -138,23 +138,23 @@
 Every person must have a **unique ID**.
 
 ## ID Series
-- [ ] Doctor IDs must use the `2XXX` series
-- [ ] Nurse IDs must use the `3XXX` series
-- [ ] Patient IDs must use the `4XXX` series
+- [X] Doctor IDs must use the `2XXX` series
+- [X] Nurse IDs must use the `3XXX` series
+- [X] Patient IDs must use the `4XXX` series
 
 ## ID Validation
-- [ ] Validate the ID format
-- [ ] Doctor ID must belong to `2XXX`
-- [ ] Nurse ID must belong to `3XXX`
-- [ ] Patient ID must belong to `4XXX`
-- [ ] Reject an ID from the wrong series
-- [ ] Reject duplicate IDs
-- [ ] Check whether the ID already exists before adding a person
+- [X] Validate the ID format
+- [X] Doctor ID must belong to `2XXX`
+- [X] Nurse ID must belong to `3XXX`
+- [X] Patient ID must belong to `4XXX`
+- [X] Reject an ID from the wrong series
+- [X] Reject duplicate IDs
+- [X] Check whether the ID already exists before adding a person
 - [ ] Handle invalid/non-existent IDs during search
 - [ ] Handle invalid/non-existent IDs during removal
 - [ ] Handle invalid/non-existent IDs during update
 - [ ] Decide the exact valid range within each series
-- [ ] Decide whether IDs are stored as integers or strings
+- [X] Decide whether IDs are stored as integers or strings
 
 ## ID-Based Operations
 - [ ] Search a person using their unique ID
@@ -165,7 +165,7 @@ Every person must have a **unique ID**.
 
 ## ID Design Decision
 - [ ] Decide whether IDs are manually entered or automatically generated
-- [ ] If manually entered, validate every ID
+- [X] If manually entered, validate every ID
 - [ ] If automatically generated later, generate the next available ID in the correct series
 
 ---

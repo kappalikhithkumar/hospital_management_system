@@ -1,5 +1,6 @@
 from hospital_functions import create_doctor, create_patient, create_nurse
-from hospital_functions import display_doctor, display_patient, display_nurse
+from hospital_functions import display_person
+from hospital_functions import id_validator
 
 def main_menu(hospital):
 
@@ -115,12 +116,34 @@ def display_menu(hospital):
 
         match choice:
             case '1':
-                display_doctor(hospital)
+                display_menu_person(hospital, "doctor")
+                # display_doctor(hospital)
             case '2':
-                display_patient(hospital)
+                display_menu_person(hospital, "patient")
+                # display_patient(hospital)
             case '3':
-                display_nurse(hospital)
+                display_menu_person(hospital, "nurse")
+                # display_nurse(hospital)
             case '4':
                 break
             case _:
                 pass
+
+
+def display_menu_person(hospital, person):
+    print(f"--------DISPLAY {person}--------")
+    print(f"1. Display a {person} using ID")
+    print(f"2. Display all {person}s")
+
+    choice = input("Enter your choice: ")
+
+    match choice:
+        case '1':
+            while True:
+                person_id = input(f"Enter {person} id: ")
+                is_available, person_object = id_validator(hospital, person_id, person)
+                if is_available:
+                    person_object.display()
+                    break
+        case '2':
+            display_person(hospital, person)

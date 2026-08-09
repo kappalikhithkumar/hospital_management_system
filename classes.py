@@ -31,24 +31,28 @@ class Hospital:
     def has_id(self, person_id, person):
 
         id_found = False
+        person_object = None
 
         match person:
             case "doctor":
                 for doctor in self.doctors:
                     id_found = doctor.has_id(person_id)
                     if id_found:
+                        person_object = doctor
                         break
             case "nurse":
                 for nurse in self.nurses:
                     id_found = nurse.has_id(person_id)
                     if id_found:
+                        person_object = nurse
                         break
             case "patient":
                 for patient in self.patients:
                     id_found = patient.has_id(person_id)
                     if id_found:
+                        person_object = patient
                         break
-        return id_found
+        return id_found, person_object
 
 class Person:
     def __init__(self, person_id, name, gender, age=None):
