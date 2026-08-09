@@ -52,20 +52,20 @@
 # 🔴 CORE FEATURES PENDING
 
 ## 1. Search
-- [ ] Search doctor
-- [ ] Search patient
-- [ ] Search nurse
-- [ ] Handle person not found
-- [ ] Handle empty lists
-- [ ] Handle duplicate names
-- [ ] Decide whether search is case-sensitive
+- [x] Search doctor
+- [x] Search patient
+- [x] Search nurse
+- [x] Handle person not found
+- [x] Handle empty lists
+- [x] Duplicate names do not need to be unique because person ID is the unique identifier
+- [x] Search uses unique ID, so name case-sensitivity is not applicable
 
 ## 2. Remove
 - [ ] Remove doctor
 - [ ] Remove patient
 - [ ] Remove nurse
-- [ ] Handle person not found
-- [ ] Handle empty lists
+- [x] Handle person not found
+- [x] Handle empty lists
 - [ ] Decide how a person is identified for removal
 
 ## 3. Update
@@ -86,7 +86,7 @@
 - [ ] Decide whether numbers are allowed
 - [ ] Decide whether special characters are allowed
 - [ ] Decide how names are normalized
-- [ ] Handle duplicate names
+- [x] Duplicate names do not need to be unique because person ID is the unique identifier
 
 ## Age
 - [ ] Must be numeric
@@ -121,10 +121,8 @@
 
 # 🟡 DUPLICATE / EDGE CASE HANDLING
 
-- [ ] Decide whether duplicate person names are allowed
-- [ ] If not allowed, prevent duplicate creation
-- [ ] If allowed, make search/remove able to distinguish duplicates
-- [ ] Consider introducing a unique ID later
+- [x] Duplicate person names are allowed
+- [x] Person ID is used to distinguish people
 - [ ] Handle empty hospital lists
 - [ ] Handle search with no results
 - [ ] Handle removal with no results
@@ -153,18 +151,17 @@ Every person must have a **unique ID**.
 - [ ] Handle invalid/non-existent IDs during search
 - [ ] Handle invalid/non-existent IDs during removal
 - [ ] Handle invalid/non-existent IDs during update
-- [ ] Decide the exact valid range within each series
 - [X] Decide whether IDs are stored as integers or strings
 
 ## ID-Based Operations
-- [ ] Search a person using their unique ID
+- [x] Search a person using their unique ID
 - [ ] Remove a person using their unique ID
 - [ ] Update a person using their unique ID
-- [ ] Display the person's ID with their details
-- [ ] Keep IDs unique across the hospital
+- [x] Display the person's ID with their details
+- [X] Keep IDs unique across the hospital
 
 ## ID Design Decision
-- [ ] Decide whether IDs are manually entered or automatically generated
+- [X] Decide whether IDs are manually entered or automatically generated
 - [X] If manually entered, validate every ID
 - [ ] If automatically generated later, generate the next available ID in the correct series
 
@@ -178,8 +175,8 @@ Every person must have a **unique ID**.
 - [ ] Invalid search-menu choice
 - [ ] Invalid display-menu choice
 - [ ] Show a clear error message
-- [ ] Return to the correct menu after invalid input
-- [ ] Use `Back` instead of `Exit` for submenus where appropriate
+- [X] Return to the correct menu after invalid input
+- [X] Use `Back` instead of `Exit` for submenus where appropriate
 
 ---
 
@@ -188,8 +185,8 @@ Every person must have a **unique ID**.
 - [ ] Show a message when no doctors exist
 - [ ] Show a message when no patients exist
 - [ ] Show a message when no nurses exist
-- [ ] Fix Nurse display label: `Shift`, not `Specialization`
-- [ ] Fix Patient display label: `Age`, not `Specialization`
+- [x] Fix Nurse display label: `Shift`, not `Specialization`
+- [x] Fix Patient display label: `Age`, not `Specialization`
 - [ ] Improve display formatting if needed
 
 ---
@@ -240,7 +237,7 @@ For every feature, test:
 - [ ] `remove_doctor()`
 - [ ] `remove_patient()`
 - [ ] `remove_nurse()`
-- [ ] Search methods if needed
+- [x] ID-based search through `has_id()`
 - [ ] Update methods if needed
 
 ### Person
@@ -249,17 +246,17 @@ For every feature, test:
 
 ### Doctor
 - [x] `__init__`
-- [ ] Add unique ID
+- [x] Add unique ID
 - [x] `display()`
 
 ### Patient
 - [x] `__init__`
-- [ ] Add unique ID
+- [x] Add unique ID
 - [x] `display()`
 
 ### Nurse
 - [x] `__init__`
-- [ ] Add unique ID
+- [x] Add unique ID
 - [x] `display()`
 
 ---
@@ -278,9 +275,9 @@ For every feature, test:
 - [x] `display_nurse()`
 
 ### Search
-- [ ] `search_doctor()`
-- [ ] `search_patient()`
-- [ ] `search_nurse()`
+- [x] Search doctor via ID
+- [x] Search patient via ID
+- [x] Search nurse via ID
 
 ### Remove
 - [ ] `remove_doctor()`
@@ -299,11 +296,11 @@ For every feature, test:
 - [x] `main_menu()`
 - [x] `add_menu()`
 - [x] `remove_menu()` skeleton
-- [x] `search_menu()` skeleton
+- [x] `search_menu()`
 - [x] `display_menu()`
 
 ### Connect pending features
-- [ ] Connect search functions
+- [x] Connect search functionality
 - [ ] Connect remove functions
 - [ ] Connect update functions when added
 - [ ] Validate submenu choices
@@ -323,8 +320,8 @@ For every feature, test:
 # 🗓️ NEXT WORK SESSION
 
 ## Priority 1 — Fix tiny existing issues
-- [ ] Fix Nurse display text
-- [ ] Fix Patient display text
+- [x] Fix Nurse display text
+- [x] Fix Patient display text
 - [ ] Clean unnecessary imports
 
 ## Priority 2 — Person ID System
@@ -338,12 +335,12 @@ For every feature, test:
 - [ ] Test duplicate IDs
 
 ## Priority 3 — Search
-- [ ] Search by unique ID
-- [ ] Design search logic
-- [ ] Implement doctor search
-- [ ] Implement patient search
-- [ ] Implement nurse search
-- [ ] Test search
+- [x] Search by unique ID
+- [x] Design search logic
+- [x] Implement doctor search
+- [x] Implement patient search
+- [x] Implement nurse search
+- [ ] Test search thoroughly
 
 ## Priority 4 — Remove
 - [ ] Design removal logic
@@ -368,7 +365,7 @@ For every feature, test:
 
 These are ideas for later — NOT current tasks.
 
-- [ ] Unique IDs for people
+- [x] Unique IDs for people
 - [ ] Doctor ↔ patient relationships
 - [ ] Appointments
 - [ ] Doctor availability

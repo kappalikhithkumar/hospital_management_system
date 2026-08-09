@@ -17,16 +17,25 @@ class Hospital:
         self.nurses.append(nurse)
 
     def display_doctors(self):
-        for doctor in self.doctors:
-            doctor.display()
+        if self.doctors:
+            for doctor in self.doctors:
+                doctor.display()
+        else:
+            print("No doctors are currently registered.")
 
     def display_patients(self):
-        for patient in self.patients:
-            patient.display()
+        if self.patients:
+            for patient in self.patients:
+                patient.display()
+        else:
+            print("No patients are currently registered.")
 
     def display_nurses(self):
-        for nurse in self.nurses:
-            nurse.display()
+        if self.nurses:
+            for nurse in self.nurses:
+                nurse.display()
+        else:
+            print("No nurses are currently registered.")
 
     def has_id(self, person_id, person):
 
@@ -53,6 +62,20 @@ class Hospital:
                         person_object = patient
                         break
         return id_found, person_object
+
+    def remove_person(self, person_id, person):
+        id_found, person_object = self.has_id(person_id, person)
+        if id_found:
+            print("successfully removed: ")
+            person_object.display()
+            match person:
+                case "doctor":
+                    self.doctors.remove(person_object)
+                case "patient":
+                    self.patients.remove(person_object)
+                case "nurse":
+                    self.nurses.remove(person_object)
+
 
 class Person:
     def __init__(self, person_id, name, gender, age=None):
@@ -92,7 +115,7 @@ class Nurse(Person):
     def display(self):
         print("----------------------")
         super().display()
-        print(f"Specialization: {self.shift}")
+        print(f"Shift: {self.shift}")
         print("----------------------")
 
 
@@ -103,5 +126,5 @@ class Patient(Person):
     def display(self):
         print("----------------------")
         super().display()
-        print(f"Specialization: {self.age}")
+        print(f"Age: {self.age}")
         print("----------------------")

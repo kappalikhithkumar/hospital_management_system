@@ -5,6 +5,7 @@ def id_validator(hospital, person_id, person):
     is_digit = False
     is_available = False
     is_valid = False
+    dict_id = {"doctor": '2', "nurse": '3', "patient": '4'}
 
     if not person_id.isdigit():
         print("ID must be in digits")
@@ -16,27 +17,11 @@ def id_validator(hospital, person_id, person):
         return is_quadra,None
     is_quadra = True
 
-    if not person_id[0] in ('2', '3', '4'):
-        if person == "doctor":
-            print("doctor ID must start with 2")
-        elif person == "nurse":
-            print("nurse ID must start with 3")
-        else:
-            print("patient ID must start with 4")
-        return False,None
+    if not person_id[0] in list(dict_id.values()) or not person_id[0] == dict_id.get(person):
+        print(f"{person} ID must start with {dict_id.get(person)}")
+        return is_valid,None
 
-    match person:
-        case "doctor":
-            if person_id[0] == '2':
-                is_valid = True
-
-        case "nurse":
-            if person_id[0] == '3':
-                is_valid = True
-
-        case "patient":
-            if person_id[0] == '4':
-                is_valid = True
+    is_valid = True
 
     has_id, person_object = hospital.has_id(person_id, person)
 
@@ -58,6 +43,8 @@ def id_validator_creation(hospital, person_id, person):
     is_unique = False
     is_valid = False
 
+    dict_id = {"doctor": '2', "nurse": '3', "patient": '4'}
+
     if not person_id.isdigit():
         print("ID must be in digits")
         return is_digit
@@ -68,27 +55,11 @@ def id_validator_creation(hospital, person_id, person):
         return is_quadra
     is_quadra = True
 
-    if not person_id[0] in ('2','3','4'):
-        if person == "doctor":
-            print("doctor ID must start with 2")
-        elif person == "nurse":
-            print("nurse ID must start with 3")
-        else:
-            print("patient ID must start with 4")
-        return False
+    if not person_id[0] in list(dict_id.values()) or not person_id[0] == dict_id.get(person):
+        print(f"{person} ID must start with {dict_id.get(person)}")
+        return is_valid
 
-    match person:
-        case "doctor":
-            if person_id[0] == '2':
-                is_valid = True
-
-        case "nurse":
-            if person_id[0] == '3':
-                is_valid = True
-
-        case "patient":
-            if person_id[0] == '4':
-                is_valid = True
+    is_valid = True
 
     has_id, person_object =  hospital.has_id(person_id, person)
 
@@ -104,8 +75,15 @@ def id_validator_creation(hospital, person_id, person):
 
 
 def create_hospital():
-    hospital_name = input("Enter name: ")
-    hospital_branch = input("Enter branch: ")
+    while True:
+        hospital_name = input("Enter name: ")
+        if is_valid_name(hospital_name):
+            break
+    while True:
+        hospital_branch = input("Enter branch: ")
+        if is_valid_name(hospital_branch):
+            break
+
     hospital = Hospital(hospital_name, hospital_branch)
     return hospital
 
@@ -120,9 +98,21 @@ def create_doctor(hospital):
         if id_validator_creation(hospital, person_id, "doctor"):
             break
 
-    name = input("Enter name: ")
-    gender = input("Enter gender: ")
-    specialization = input("Enter specialization:")
+    while True:
+        name = input("Enter name: ")
+        if is_valid_name(name):
+            break
+
+    while True:
+        gender = input("Enter gender: ").lower()
+        if gender_validator(gender):
+            break
+
+    while True:
+        specialization = input("Enter specialization:")
+        if is_valid_name(specialization):
+            break
+
     print("---------------------------")
 
     doctor = Doctor(person_id, name, gender, specialization)
@@ -139,9 +129,20 @@ def create_patient(hospital):
         if id_validator_creation(hospital, person_id, "patient"):
             break
 
-    name = input("Enter name: ")
-    age = input("Enter age: ")
-    gender = input("Enter gender [M/F]: ")
+    while True:
+        name = input("Enter name: ")
+        if is_valid_name(name):
+            break
+
+    while True:
+        age = input("Enter age: ")
+        if age_validator(age):
+            break
+
+    while True:
+        gender = input("Enter gender: ").lower()
+        if gender_validator(gender):
+            break
     print("---------------------------")
 
     patient = Patient(person_id, name, age, gender)
@@ -158,9 +159,20 @@ def create_nurse(hospital):
         if id_validator_creation(hospital, person_id, "nurse"):
             break
 
-    name = input("Enter name: ")
-    gender = input("Enter gender [M/F]: ")
-    shift = input("Enter shift of nurse: ")
+    while True:
+        name = input("Enter name: ")
+        if is_valid_name(name):
+            break
+
+    while True:
+        gender = input("Enter gender: ").lower()
+        if gender_validator(gender):
+            break
+
+    while True:
+        shift = input("Enter shift of nurse: ")
+        if is_valid_name(shift):
+            break
     print("---------------------------")
 
     nurse = Nurse(person_id, name, gender, shift)
@@ -178,3 +190,38 @@ def display_person(hospital, person):
             hospital.display_patients()
         case "nurse":
             hospital.display_nurses()
+
+
+def search_by_id(hospital, person_id, person):
+    is_available, person_object = id_validator(hospital, person_id, person)
+    return is_available, person_object
+
+def remove_person(hospital, person_id, person):
+    hospital.remove_person(person_id, person)
+
+
+def age_validator(age):
+    if age.isdigit() and 0<int(age)<110:
+        return True
+    print("Invalid age...")
+    return False
+
+def is_valid_name(name):
+
+    if len(name)<1 or name.isspace():
+        print("Must not be empty!")
+        return False
+
+    for word in name.split():
+        if not word.isalpha():
+            print("Must be alphabetic")
+            return False
+
+    return True
+
+
+def gender_validator(gender):
+    if gender in {'m', 'f', 'male', 'female', 'others'}:
+        return True
+    print("Invalid gender...")
+    return False

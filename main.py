@@ -1,6 +1,5 @@
-from classes import Hospital, Doctor, Patient, Nurse
-from hospital_functions import create_hospital, create_patient, create_doctor
-from menus import main_menu, add_menu, search_menu, remove_menu
+from hospital_functions import create_hospital
+from menus import main_menu
 
 def main():
     # display message
