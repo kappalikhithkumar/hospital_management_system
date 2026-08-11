@@ -77,6 +77,7 @@ class Hospital:
                     self.nurses.remove(person_object)
 
 
+
 class Person:
     def __init__(self, person_id, name, gender, age=None):
         self.person_id = person_id
@@ -94,6 +95,15 @@ class Person:
             return True
         return False
 
+    def update_name(self, name):
+        self.name = name
+
+    def update_gender(self, gender):
+        self.gender = gender
+
+    def update_age(self, age):
+        self.age = age
+
 class Doctor(Person):
     def __init__(self, person_id, name, gender, specialization):
         super().__init__(person_id, name, gender)
@@ -105,6 +115,8 @@ class Doctor(Person):
         print(f"Specialization: {self.specialization}")
         print("----------------------")
 
+    def update_specialization(self, specialization):
+        self.specialization = specialization
 
 
 class Nurse(Person):
@@ -117,6 +129,10 @@ class Nurse(Person):
         super().display()
         print(f"Shift: {self.shift}")
         print("----------------------")
+
+    def update_shift(self, shift):
+        self.shift = shift
+
 
 
 class Patient(Person):

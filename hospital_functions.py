@@ -192,6 +192,7 @@ def display_person(hospital, person):
             hospital.display_nurses()
 
 
+
 def search_by_id(hospital, person_id, person):
     is_available, person_object = id_validator(hospital, person_id, person)
     return is_available, person_object
@@ -225,3 +226,59 @@ def gender_validator(gender):
         return True
     print("Invalid gender...")
     return False
+
+
+def update_person_name(person_object):
+    while True:
+        name = input("Enter name: ")
+        if is_valid_name(name):
+            print("successfully updated!")
+            person_object.update_name(name)
+            break
+
+
+def update_person_age(person_object):
+    while True:
+        age = input("Enter age: ")
+        if age_validator(age):
+            print("successfully updated!")
+            person_object.update_age(age)
+            break
+
+def update_person_gender(person_object):
+    while True:
+        gender = input("Enter gender: ").lower()
+        if gender_validator(gender):
+            print("successfully updated!")
+            person_object.update_gender(gender)
+            break
+
+def update_doctor_specialization(person_object):
+    while True:
+        specialization = input("Enter specialization: ")
+        if is_valid_name(specialization):
+            person_object.update_specialization(specialization)
+            break
+
+def update_nurse_shift(person_object):
+    while True:
+        shift = input("Enter nurse shift:")
+        if is_valid_name(shift):
+            person_object.update_shift(shift)
+            break
+
+def update_all_details(person_object, person):
+    match person:
+        case "doctor":
+                update_person_name(person_object)
+                update_person_gender(person_object)
+                update_doctor_specialization(person_object)
+        case "nurse":
+            update_person_name(person_object)
+            update_person_gender(person_object)
+            update_nurse_shift(person_object)
+        case "patient":
+            update_person_name(person_object)
+            update_person_gender(person_object)
+            update_person_age(person_object)
+

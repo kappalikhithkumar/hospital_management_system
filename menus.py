@@ -1,7 +1,12 @@
-from hospital_functions import create_doctor, create_patient, create_nurse
+from importlib.metadata import pass_none
+
+from hospital_functions import create_doctor, create_patient, create_nurse, is_valid_name, age_validator, \
+    gender_validator, update_nurse_shift
 from hospital_functions import display_person
 from hospital_functions import id_validator
-from hospital_functions import search_by_id, remove_person
+from hospital_functions import search_by_id, remove_person, update_person_name, update_person_gender
+from hospital_functions import update_doctor_specialization, update_all_details, update_person_age
+
 
 def main_menu(hospital):
 
@@ -11,7 +16,8 @@ def main_menu(hospital):
         print("2. Remove a person")
         print("3. Search a person")
         print("4. Display a person")
-        print("5. Exit")
+        print("5. Update a person")
+        print("6. Exit")
 
         choice = input("Enter your choice: ")
         match choice:
@@ -28,6 +34,9 @@ def main_menu(hospital):
                display_menu(hospital)
 
             case '5':
+                update_menu(hospital)
+
+            case '6':
                 print("thank you!")
                 break
 
@@ -86,7 +95,10 @@ def remove_menu(hospital):
             person_id = input(f"Enter {person} ID / Q to quit: ")
             if person_id in ('Q', 'q'):
                 break
-            if id_validator(hospital, person_id, person):
+
+            is_valid, person_object = id_validator(hospital, person_id, person)
+
+            if is_valid:
                 remove_person(hospital, person_id, person)
 
 def search_menu(hospital):
@@ -166,3 +178,127 @@ def display_menu_person(hospital, person):
             display_person(hospital, person)
         case _:
             print("Enter a valid option!")
+
+
+def update_menu(hospital):
+    person = None
+    while True:
+        print("-----UPDATE A PERSON-----")
+        print("1. Update a doctor")
+        print("2. Update a patient")
+        print("3. Update a nurse")
+        print("4. Back")
+
+        choice = input("Enter your choice: ")
+
+
+
+        match choice:
+            case '1':
+                person = "doctor"
+            case '2':
+                person = "patient"
+            case '3':
+                person = "nurse"
+            case '4':
+                break
+            case _:
+                print("Invalid option!")
+                continue
+        while True:
+            person_id = input(f"Enter id of {person} / enter Q to quit: ")
+
+            if person_id in ('q', 'Q', 'quit', 'QUIT'):
+                break
+
+            is_valid, person_object = id_validator(hospital, person_id, person)
+
+            if is_valid:
+                update_menu_person(person_object, person)
+                break
+
+def update_menu_person(person_object, person):
+    match person:
+        case "doctor":
+            while True:
+                print("-----UPDATE A DOCTOR-----")
+                print("What do you want to update?: ")
+                print("1. Name")
+                print("2. Gender")
+                print("3. Specialization")
+                print("4. Update all details")
+                print("5. Back")
+                choice = input("enter your choice: ")
+                match choice:
+                    case '1':
+                        update_person_name(person_object)
+                        break
+                    case '2':
+                        update_person_gender(person_object)
+                        break
+                    case '3':
+                        update_doctor_specialization(person_object)
+                        break
+                    case '4':
+                        update_all_details(person_object, person)
+                        break
+                    case '5':
+                        break
+        case "patient":
+            while True:
+                print("-----UPDATE A PATIENT-----")
+                print("What do you want to update?: ")
+                print("1. Name")
+                print("2. Gender")
+                print("3. Age")
+                print("4. Update all details")
+                print("5. Back")
+                choice = input("enter your choice: ")
+                match choice:
+                    case '1':
+                        update_person_name(person_object)
+                        break
+
+                    case '2':
+                        update_person_gender(person_object)
+                        break
+
+                    case '3':
+                        update_person_age(person_object)
+                        break
+
+                    case '4':
+                        update_all_details(person_object, person)
+                        break
+
+                    case '5':
+                        break
+        case "nurse":
+            while True:
+                print("-----UPDATE A NURSE-----")
+                print("What do you want to update?: ")
+                print("1. Name")
+                print("2. Gender")
+                print("3. Shift")
+                print("4. Update all details")
+                print("5. Back")
+                choice = input("enter your choice: ")
+                match choice:
+                    case '1':
+                        update_person_name(person_object)
+                        break
+
+                    case '2':
+                        update_person_gender(person_object)
+                        break
+
+                    case '3':
+                        update_nurse_shift(person_object)
+                        break
+
+                    case '4':
+                        update_all_details(person_object, person)
+                        break
+                        
+                    case '5':
+                        break
